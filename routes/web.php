@@ -6,6 +6,7 @@ use App\Http\Controllers\{
     RendaController,
     DespesaController,
     CategoriaController,
+    TipoFinancaController,
     LoginController
 };
 
@@ -54,4 +55,15 @@ Route::prefix('user')->middleware('auth')->group(function() {
         Route::get('edit/{id}', [DespesaController::class, 'edit'])->name('edit.despesa');
         Route::post('update', [DespesaController::class, 'update'])->name('update.despesa');
         Route::post('delete', [DespesaController::class, 'delete'])->name('delete.despesa');
+    });
+
+    Route::prefix('tipe_user')->group(function() {
+
+        //Despesa
+        Route::get('index', [TipoFinancaController::class, 'index'])->name('index.despesa');
+        Route::get('show', [TipoFinancaController::class, 'show'])->name('show.despesa');
+        Route::post('create', [TipoFinancaController::class, 'create'])->name('create.despesa');
+        Route::get('edit/{id}', [TipoFinancaController::class, 'edit'])->name('edit.despesa');
+        Route::post('update', [TipoFinancaController::class, 'update'])->name('update.despesa');
+        Route::post('delete', [TipoFinancaController::class, 'delete'])->name('delete.despesa');
     });

@@ -11,7 +11,7 @@
                     {!! Session::get("msg") !!}
                 </div>
             @endif
-            <a href = "{{ route('show.renda') }}" class = "btn btn-success">Cadastrar Renda</a>
+            <a href = "{{ route('show.tipo_financa') }}" class = "btn btn-success">Cadastrar Despesa</a>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -30,39 +30,31 @@
                     <th>
                         descrição
                     </th>
-                    <th style="width: 8%" class="text-center">
-                       Data
-                    </th>
                     <th style="width: 20%; text-align: center;">
                         Opções
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($rendas as $renda)
+                @foreach($tipo_financas as $tipo_financa)
                     <tr>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $renda->name }}
+                                {{ $tipo_financa->name }}
                             </a>
                         </td>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $renda->descricao }}
-                            </a>
-                        </td>
-                        <td style = "width: 10%;">
-                            <a>
-                                {{ \Carbon\Carbon::parse($renda->date)->format('d/m/Y') }}
+                                {{ $tipo_financa->descricao }}
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $renda->id_renda]) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $tipo_financa->id_tipo_financa]) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar
                             </a>
-                            <button class="btn btn-danger btn-sm remove" id = "{{ $renda->id_renda }}" data-toggle="modal" data-target="#exampleModal">
+                            <button class="btn btn-danger btn-sm remove" id = "{{ $tipo_financa->id_tipo_financa }}" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fas fa-trash">
                                 </i>
                                 Delete
@@ -82,7 +74,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <h4>Tem certeza que deseja excluir essa renda?</h4>
+            <h4>Tem certeza que deseja excluir esse tipo de finança?</h4>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary close" data-dismiss="modal">fechar</button>
@@ -109,7 +101,7 @@
                 $.ajax({
                     headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     type 	: 'post',
-                    url		: 'renda/delete',
+                    url		: 'tipo_financa/delete',
                     data 	: { id : id}
                 }).done(function(response)
                 {

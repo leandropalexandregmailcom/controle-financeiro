@@ -1,51 +1,60 @@
 @extends('welcome')
 
 @section('content')
-<div class="container">
-	<div class="d-flex justify-content-center h-100">
-		<div class="card" style = "margin: 8% 0 0; width: 40%;">
-			<div class="card-body">
-				<form method="POST" action="{{ route('create.gasto') }}">
-                    @csrf
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" name = "nome" placeholder="Nome">
-
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="text" class="form-control" name = "descricao" placeholder="Descrição">
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<select class="form-control" name = "categoria">
-                            @foreach($categorias as $categoria)
-                                <option value = "{{ $categoria->id_categoria }}">{{ $categoria->nome }}</option>
-                            @endforeach
-                        </select>
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="date" class="form-control" name = "date" placeholder="Data">
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Login" class="btn btn-primary float-right login_btn">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('dist/js/demo.js') }}"></script>
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Atualizar Renda</h3>
+    </div>
+    <div class = "panel-heading">
+        <div class = "row m-1">
+            <div class = "col-xs-4 align-left">
+                <a href = "{{ route('index.renda') }}" role = "button" class = "btn btn-secondary" aria-expanded = "false">
+                    <i class = "fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    @if($errors->any())
+    <div class = "alert alert-danger mt-5">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form role="form" method = "post" action = "{{ route('update.renda') }}">
+      <div class="card-body">
+        @csrf
+        <div class="form-group">
+            <label for="name">Categoria</label>
+            <select name = "categoria" class="form-control" >
+                <option value = "{{ $categoria->id_categoria }}">
+                    @foreach($categorias as $categoria)
+                        {{ $categoria->nome }}
+                    @endforeach
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" name = "name" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label for="text">Descricão</label>
+            <input type="text" class="form-control" id="descricao" name = "descricao" placeholder="Descrição">
+        </div>
+        <div class="form-group">
+            <label for="email">Data</label>
+            <input class = "form-control"  type="date" data-date-format="DD MMMM YYYY"  name = "data" placeholder="Data">
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </form>
+  </div>
 @endsection

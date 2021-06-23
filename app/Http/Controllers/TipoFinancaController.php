@@ -29,6 +29,7 @@ class TipoFinancaController extends Controller
 
     public function create(CreateTipoFinancaRequest $request)
     {
+        $request->id_user = auth()->user()->id;
         $this->model->create($request->all());
 
         session()->flash('msg', 'O tipo de finança foi cadastrado com sucesso!');
@@ -38,6 +39,7 @@ class TipoFinancaController extends Controller
 
     public function update(UpdateTipoFinancaRequest $request)
     {
+        $request->id_user = auth()->user()->id;
         $this->model->update($request->except('_token'));
 
         session()->flash('msg', 'O tipo de finança foi atualizada com sucesso!');
