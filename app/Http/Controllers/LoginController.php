@@ -8,18 +8,16 @@ use App\Factory\UsuarioFactory;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login()
     {
-        $Usuario = new Usuario();
+        return view('login/login');
+    }
+
+    public function logar(Request $request, Usuario $Usuario, UsuarioFactory $UsuarioFactory)
+    {
         $Usuario->setEmail($request->email);
         $Usuario->setPassword($request->password);
 
-        $UsuarioFactory = new UsuarioFactory();
         $UsuarioFactory->login($Usuario);
-    }
-
-    public function logar()
-    {
-        return redirect()->view('login');
     }
 }

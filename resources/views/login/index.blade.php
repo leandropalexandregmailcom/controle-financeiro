@@ -20,54 +20,15 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
-<div class="wrapper">
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <span class="brand-text font-weight-light">Crud</span>
+    </a>
 
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Menu
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('home.user') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gerenciar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('show.user') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cadadastrar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-        </ul>
-      </nav>
-    </div>
   </aside>
 
 <div class="content-wrapper">
-    gsfdss
  @yield('content')
-</div>
 </div>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

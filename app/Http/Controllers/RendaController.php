@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class RendaController extends Controller
 {
-    //
+    public function index()
+    {
+        return 'teste';
+    }
 }

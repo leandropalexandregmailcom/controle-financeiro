@@ -19,15 +19,8 @@
 
 </head>
 <body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <span class="brand-text font-weight-light">Crud</span>
-    </a>
 
-
-  </aside>
-
-<div class="content-wrapper">
+<div class = "container">
  @yield('content')
 </div>
 <script src="plugins/jquery/jquery.min.js"></script>

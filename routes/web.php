@@ -1,70 +1,57 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+use App\Http\Controllers\{
+    UserController,
+    RendaController,
+    DespesaController,
+    CategoriaController,
+    LoginController
+};
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::post('logar', [LoginController::class, 'logar'])->name('logar');
+Route::get('show', [UserController::class, 'show'])->name('show.user');
+Route::post('create', [UserController::class, 'create'])->name('create.user');
 
-
-
-
-Route::group(['prefix' => '/'], function() {
-
-    Route::get('/', 'App\Http\Controllers\UserController@index')->name('home');
-    Route::get('logar', 'App\Http\Controllers\LoginController@logar')->name('logar');
-    Route::get('login', 'App\Http\Controllers\LoginController@login')->name('login');
-    Route::get('index', 'App\Http\Controllers\UserController@index')->name('index');
-    Route::get('show', 'App\Http\Controllers\UserController@show')->name('show');
-    Route::post('create', 'App\Http\Controllers\UserController@create')->name('create');
-    Route::get('edit', 'App\Http\Controllers\UserController@edit')->name('edit');
-    Route::post('update', 'App\Http\Controllers\UserController@update')->name('update');
-    Route::post('delete', 'App\Http\Controllers\UserController@delete')->name('delete');
+Route::prefix('user')->middleware('auth')->group(function() {
+    //Usuário
+    Route::get('/', [UserController::class, 'index'])->name('home.user');
+    Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit.user');
+    Route::post('update', [UserController::class, 'update'])->name('update.user');
+    Route::post('delete', [UserController::class, 'delete'])->name('delete.user');
 });
 
-Route::group(['prefix' => 'administrador/'], function() {
+    Route::prefix('categoria')->group(function() {
 
-});
+        //Categoria
+        Route::get('index', [CategoriaController::class, 'index'])->name('index.categoria');
+        Route::get('show', [CategoriaController::class, 'show'])->name('show.categoria');
+        Route::post('create', [CategoriaController::class, 'create'])->name('create.categoria');
+        Route::get('edit/{id}', [CategoriaController::class, 'edit'])->name('edit.categoria');
+        Route::post('update', [CategoriaController::class, 'update'])->name('update.categoria');
+        Route::post('delete', [CategoriaController::class, 'delete'])->name('delete.categoria');
+    });
 
-Route::group(['prefix' => 'cliente/'], function() {
+    Route::prefix('renda')->group(function() {
 
-});
+        //Renda
+        Route::get('index', [RendaController::class, 'index'])->name('index.renda');
+        Route::get('show', [RendaController::class, 'show'])->name('show.renda');
+        Route::post('create', [RendaController::class, 'create'])->name('create.renda');
+        Route::get('edit/{id}', [RendaController::class, 'edit'])->name('edit.renda');
+        Route::post('update', [RendaController::class, 'update'])->name('update.renda');
+        Route::post('delete', [RendaController::class, 'delete'])->name('delete.renda');
 
-Route::group(['prefix' => 'categoria/'], function() {
+    });
 
-    //Categoria
-    Route::get('index', 'App\Http\Controllers\CategoriaController@index')->name('index_categoria');
-    Route::get('show', 'App\Http\Controllers\CategoriaController@show')->name('show_categoria');
-    Route::post('create', 'App\Http\Controllers\CategoriaController@create')->name('create_categoria');
-    Route::get('edit', 'App\Http\Controllers\CategoriaController@edit')->name('edit_categoria');
-    Route::post('update', 'App\Http\Controllers\CategoriaController@update')->name('update_categoria');
-    Route::post('delete', 'App\Http\Controllers\CategoriaController@delete')->name('delete_categoria');
-});
+    Route::prefix('despesa')->group(function() {
 
-Route::group(['prefix' => 'despesa/'], function() {
-    //Despesa
-    Route::get('index', 'App\Http\Controllers\DespesaController@index')->name('index_despesa');
-    Route::get('show', 'App\Http\Controllers\DespesaController@show')->name('show_despesa');
-    Route::post('create', 'App\Http\Controllers\DespesaController@create')->name('create_despesa');
-    Route::get('edit', 'App\Http\Controllers\DespesaController@edit')->name('edit_despesa');
-    Route::post('update', 'App\Http\Controllers\DespesaController@update')->name('update_despesa');
-    Route::post('delete', 'App\Http\Controllers\DespesaController@delete')->name('delete_despesa');
-});
-
-Route::group(['prefix' => 'renda/'], function() {
-    //Renda
-    Route::get('index', 'App\Http\Controllers\RendaController@index')->name('index_renda');
-    Route::get('show', 'App\Http\Controllers\RendaController@show')->name('show_renda');
-    Route::post('create', 'App\Http\Controllers\RendaController@create')->name('create_renda');
-    Route::get('edit', 'App\Http\Controllers\RendaController@edit')->name('edit_renda');
-    Route::post('update', 'App\Http\Controllers\RendaController@update')->name('update_renda');
-    Route::post('delete', 'App\Http\Controllers\RendaController@delete')->name('delete_renda');
-});
+        //Despesa
+        Route::get('index', [DespesaController::class, 'index'])->name('index.despesa');
+        Route::get('show', [DespesaController::class, 'show'])->name('show.despesa');
+        Route::post('create', [DespesaController::class, 'create'])->name('create.despesa');
+        Route::get('edit/{id}', [DespesaController::class, 'edit'])->name('edit.despesa');
+        Route::post('update', [DespesaController::class, 'update'])->name('update.despesa');
+        Route::post('delete', [DespesaController::class, 'delete'])->name('delete.despesa');
+    });

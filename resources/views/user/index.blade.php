@@ -11,7 +11,7 @@
                     {!! Session::get("msg") !!}
                 </div>
             @endif
-        <a  href = "{{ route('show') }}" class = "btn btn-success">Cadastrar usuário</a>
+        <a  href = "{{ route('show.user') }}" class = "btn btn-success">Cadastrar usuário</a>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -53,7 +53,7 @@
                         </td>
                         <td style = "width: 10%;">
                             <a>
-                                {{ \Carbon\Carbon::parse($user->date_of_birth)->format('d/m/Y H:i') }}
+                                {{ \Carbon\Carbon::parse($user->date_of_birth)->format('d/m/Y') }}
                             </a>
                         </td>
                         <td class="project-actions text-right">

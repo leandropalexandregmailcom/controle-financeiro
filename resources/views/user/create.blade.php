@@ -22,16 +22,8 @@
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style = "margin: 8% 0 0; width: 40%;">
-			<div class="card-header">
-				<h3>Login com</h3>
-				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-				</div>
-			</div>
 			<div class="card-body">
-            <form method="POST" action="{{ route('logar') }}">
+				<form method="POST" action="{{ route('create.user') }}">
                     @csrf
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
@@ -46,18 +38,16 @@
 						</div>
 						<input type="password" class="form-control" name = "password" placeholder="Senha">
 					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="date" class="form-control" name = "date_of_birth" placeholder="Data de nascimento">
+					</div>
 					<div class="form-group">
 						<input type="submit" value="Login" class="btn btn-primary float-right login_btn">
 					</div>
 				</form>
-			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Não possui conta?<a href="{{ route('show.user') }}">Criar</a>
-				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">Redefinir senha</a>
-				</div>
 			</div>
 		</div>
 	</div>

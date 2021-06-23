@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class TipoFinanca extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 255);
-            $table->string('email', 255)->unique();
-            $table->string('password', 255);
-            $table->string('type', 255)->default('cliente');
-            $table->string('provider', 255)->nullable();
-            $table->string('id_provider', 255)->nullable();
+        Schema::create('tipo_financa', function(Blueprint $table)
+        {
+            $table->increments('id_tipo_financa');
+            $table->unsignedBigInteger('id_user')->references('id')->on('users');
+            $table->string('nome', 255)->unique();
+            $table->text('descricao', 255);
             $table->integer('status')->default(1);
-            $table->timestamp('date_of_birth')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
         });
@@ -36,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tipo_financa');
     }
 }
