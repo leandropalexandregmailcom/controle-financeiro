@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' 	    => 'required|regex:/^[\S]+$/',
+            'email' 	    => 'required|unique:users,email|regex:/^[\S]+$/',
             'name' 		    => 'required|min:2',
+            'password'      => 'required|min:8',
             'date_of_birth' => 'required|date'
         ];
     }
@@ -28,6 +29,7 @@ class UpdateUserRequest extends FormRequest
             'type.required'         => 'O campo type é obrigatório.',
             'email.regex'           => 'Email inválido.',
             'email.unique'          => 'Email inválido.',
+            'senha.required'        => 'O campo senha é obrigatório.',
             'date_of_birth.required'=> 'O campo data de nascimento é obrigatório.',
             'date_of_birth.date'    => 'O campo data de nascimento deve ser enviado em formato de data.'
         ];

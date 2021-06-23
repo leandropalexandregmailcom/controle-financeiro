@@ -3,28 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Classes\Usuario;
-use App\Dao\UsuarioDao;
-use App\Factory\UsuarioFactory;
-use Illuminate\Http\Request;
-use App\Http\Requests\EditUserRequest;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\User\EditUserRequest;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
 class UserController extends Controller
 {
     private $model;
-    private $usuario;
 
-    function __construct(UsuarioDao $user, Usuario $usuario)
+    function __construct(User $user)
     {
         $this->model = $user;
-        $this->usuario = $usuario;
     }
 
     public function index()
     {
-        return view('user/index')->with('users',$this->model->listar());
+        return view('user/index')->with('users',$this->model->where(['status' => 1])->paginate(10));
     }
 
     public function show()
@@ -32,41 +26,33 @@ class UserController extends Controller
         return view('user/show');
     }
 
-    public function create(CreateUserRequest $request, UsuarioFactory $factory)
+    public function create(CreateUserRequest $request)
     {
-        User::create($request->all());
+        $this->model->create($request->all());
 
         session()->flash('msg', 'O usuário foi cadastrado com sucesso!');
 
         return redirect()->route('index');
     }
 
-    public function update(UpdateUserRequest $request, UsuarioFactory $factory)
+    public function update(UpdateUserRequest $request)
     {
-        $this->usuario->setId($request->id);
-        $this->usuario->setName($request->name);
-        $this->usuario->setEmail($request->email);
-        $this->usuario->setDate_of_birth($request->date_of_birth);
-        $this->usuario->setType($request->type);
-
-        $factory->atualizar($this->usuario);
+        $this->model->update($request->except('_token'));
 
         session()->flash('msg', 'O usuário foi atualizado com sucesso!');
 
         return redirect()->route('index');
     }
 
-    public function edit(EditUserRequest $request, UsuarioFactory $factory)
+    public function edit(EditUserRequest $request)
     {
-        $this->usuario->setId($request->id);
+        $this->model->findOrFail($request->id);
 
-        return view('user/edit')->with('user', $this->model->editar($this->usuario));
+        return view('user/edit')->with('user', $this->model->where(['status' => 1])->findOrFail($request->id));
     }
 
-    public function delete(Request $request)
+    public function delete(EditUserRequest $request)
     {
-        $this->usuario->setId($request->id);
-
-        return $this->model->deletar($this->usuario);
+        $this->model->where(['id' => $request->id])->update(['status' => 0]);
     }
 }

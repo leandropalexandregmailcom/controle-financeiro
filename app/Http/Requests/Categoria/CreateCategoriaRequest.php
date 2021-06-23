@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Categoria;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditUserRequest extends FormRequest
+class CreateCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class EditUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,14 +24,7 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'id.required' => 'O campo id é obrigatório.',
+            //
         ];
     }
 }

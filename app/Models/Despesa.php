@@ -9,5 +9,7 @@ class Despesa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_despesa', 'nome', 'descricao', 'id_categoria', 'status', 'create_date', 'update_date'];
+    public $timestamp = false;
+
+    protected $fillable = ['id_despesa', 'nome', 'descricao', 'id_categoria', 'status', 'created_at', 'updated_at'];
 }
