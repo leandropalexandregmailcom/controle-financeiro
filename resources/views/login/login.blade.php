@@ -1,36 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Crud</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src = "{{ asset('js/jquery/dist/jquery.mask.min.js') }}"></script>
+@extends('index')
 
-</head>
-<body class="hold-transition sidebar-mini">
+@section('content')
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style = "margin: 8% 0 0; width: 40%;">
 			<div class="card-header">
 				<h3>Login com</h3>
 				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
+					<span><a href = "{{ route('redirect', [1]) }}"><i class="fab fa-facebook-square"></i></a></span>
+					<span><a href = "{{ route('redirect', [2]) }}"><i class="fab fa-google-plus-square"></i></a></span>
+					<span><a href = "{{ route('redirect', [3]) }}"><i class="fab fa-instagram"></i></a></span>
 				</div>
 			</div>
 			<div class="card-body">
+                @if($errors->any())
+                <div class = "alert alert-danger mt-5">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST" action="{{ route('logar') }}">
                     @csrf
 					<div class="input-group form-group">
@@ -62,9 +53,4 @@
 		</div>
 	</div>
 </div>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('dist/js/demo.js') }}"></script>
-</body>
-</html>
+@endsection

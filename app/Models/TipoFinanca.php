@@ -9,6 +9,7 @@ class TipoFinanca extends Model
 {
     use HasFactory;
 
+    public $table = 'tipo_financa';
     public $timestamp = false;
 
     protected $fillable = ['id_tipo_financa', 'nome', 'id_user', 'descricao', 'status', 'created_at', 'updated_at'];

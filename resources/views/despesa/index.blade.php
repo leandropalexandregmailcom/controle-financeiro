@@ -43,7 +43,7 @@
                     <tr>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $despesa->name }}
+                                {{ $despesa->nome }}
                             </a>
                         </td>
                         <td style = "width: 10%;">
@@ -57,7 +57,7 @@
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $despesa->id_despesa]) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit.despesa', [$despesa->id_despesa]) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar

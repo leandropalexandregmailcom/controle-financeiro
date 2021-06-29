@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Renda;
+use App\Models\Categoria;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Renda\EditRendaRequest;
 use App\Http\Requests\Renda\CreateRendaRequest;
 use App\Http\Requests\Renda\UpdateRendaRequest;
@@ -23,7 +27,7 @@ class RendaController extends Controller
 
     public function show()
     {
-        return view('renda/show');
+        return view('renda/create')->with('categorias', Categoria::where(['id_user' => Auth::user()->id, 'status' => 1])->get());
     }
 
     public function create(CreateRendaRequest $request)
@@ -32,27 +36,31 @@ class RendaController extends Controller
 
         session()->flash('msg', 'O renda foi cadastrado com sucesso!');
 
-        return redirect()->route('index');
+        return redirect()->route('index.renda');
     }
 
     public function update(UpdateRendaRequest $request)
     {
-        $this->model->update($request->except('_token'));
+        $this->model->where(['id_renda' => $request->id_renda, 'status' => 1])->update([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'data' => Carbon::createFromFormat('m/d/Y', $request->data)->format('Y-m-d')
+        ]);
 
         session()->flash('msg', 'O renda foi atualizada com sucesso!');
 
-        return redirect()->route('index');
+        return redirect()->route('index.renda');
     }
 
-    public function edit(EditRendaRequest $request)
+    public function edit(Request $request)
     {
-        $this->model->findOrFail($request->id);
-
-        return view('renda/edit')->with('renda', $this->model->where(['status' => 1])->findOrFail($request->id));
+        return view('renda/edit')
+        ->with('renda', $this->model->where(['status' => 1, 'id_renda' => $request->id])->first());
     }
 
     public function delete(EditRendaRequest $request)
     {
-        $this->model->where(['id' => $request->id])->update(['status' => 0]);
+        $this->model->where(['id_renda' => $request->id])->update(['status' => 0]);
+        return true;
     }
 }

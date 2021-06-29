@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\{
     UserController,
     RendaController,
     DespesaController,
     CategoriaController,
     TipoFinancaController,
-    LoginController
+    LoginController,
+    SocialiteController
 };
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
@@ -15,26 +17,25 @@ Route::post('logar', [LoginController::class, 'logar'])->name('logar');
 Route::get('show', [UserController::class, 'show'])->name('show.user');
 Route::post('create', [UserController::class, 'create'])->name('create.user');
 
-Route::prefix('user')->middleware('auth')->group(function() {
-    //Usuário
+
+Route::get('redirect/{provider}', [SocialiteController::class, 'redirect'])->name('redirect');
+Route::get('callback', [SocialiteController::class, 'callback'])->name('callback');
+
+Route::middleware('auth')->group(function() {
     Route::get('/', [UserController::class, 'index'])->name('home.user');
-    Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit.user');
-    Route::post('update', [UserController::class, 'update'])->name('update.user');
-    Route::post('delete', [UserController::class, 'delete'])->name('delete.user');
 });
 
-    Route::prefix('categoria')->group(function() {
+Route::prefix('user/')->middleware('auth')->group(function() {
 
-        //Categoria
-        Route::get('index', [CategoriaController::class, 'index'])->name('index.categoria');
-        Route::get('show', [CategoriaController::class, 'show'])->name('show.categoria');
-        Route::post('create', [CategoriaController::class, 'create'])->name('create.categoria');
-        Route::get('edit/{id}', [CategoriaController::class, 'edit'])->name('edit.categoria');
-        Route::post('update', [CategoriaController::class, 'update'])->name('update.categoria');
-        Route::post('delete', [CategoriaController::class, 'delete'])->name('delete.categoria');
-    });
 
-    Route::prefix('renda')->group(function() {
+    //Usuário
+    Route::get('index', [UserController::class, 'index'])->name('home.user');
+    Route::get('edit', [UserController::class, 'edit'])->name('edit.user');
+    Route::post('update', [UserController::class, 'update'])->name('update.user');
+    Route::post('delete', [UserController::class, 'delete'])->name('delete.user');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::prefix('renda/')->group(function() {
 
         //Renda
         Route::get('index', [RendaController::class, 'index'])->name('index.renda');
@@ -46,7 +47,7 @@ Route::prefix('user')->middleware('auth')->group(function() {
 
     });
 
-    Route::prefix('despesa')->group(function() {
+    Route::prefix('despesa/')->group(function() {
 
         //Despesa
         Route::get('index', [DespesaController::class, 'index'])->name('index.despesa');
@@ -57,13 +58,4 @@ Route::prefix('user')->middleware('auth')->group(function() {
         Route::post('delete', [DespesaController::class, 'delete'])->name('delete.despesa');
     });
 
-    Route::prefix('tipe_user')->group(function() {
-
-        //Despesa
-        Route::get('index', [TipoFinancaController::class, 'index'])->name('index.despesa');
-        Route::get('show', [TipoFinancaController::class, 'show'])->name('show.despesa');
-        Route::post('create', [TipoFinancaController::class, 'create'])->name('create.despesa');
-        Route::get('edit/{id}', [TipoFinancaController::class, 'edit'])->name('edit.despesa');
-        Route::post('update', [TipoFinancaController::class, 'update'])->name('update.despesa');
-        Route::post('delete', [TipoFinancaController::class, 'delete'])->name('delete.despesa');
-    });
+});

@@ -29,24 +29,14 @@
       <div class="card-body">
         @csrf
         <div class="form-group">
-            <label for="name">Categoria</label>
-            <select name = "categoria" class="form-control">
-                @foreach($categorias as $categoria)
-                    <option value = "{{ $categoria->id_categoria }}">
-                            {{ $categoria->nome }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control" id="name" name = "name" placeholder="Nome">
+            <input type="text" class="form-control" id="name" name = "nome" placeholder="Nome">
         </div>
         <div class="form-group">
             <label for="text">Descricão</label>
             <input type="text" class="form-control" id="descricao" name = "descricao" placeholder="Descrição">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-3">
             <label for="email">Data</label>
             <input class = "form-control"  type="date" data-date-format="DD MMMM YYYY"  name = "data" placeholder="Data">
         </div>

@@ -8,24 +8,22 @@
     <div class = "panel-heading">
         <div class = "row m-1">
             <div class = "col-xs-4 align-left">
-                <a href = "{{ route('index') }}" role = "button" class = "btn btn-secondary" aria-expanded = "false">
+                <a href = "{{ route('home.user') }}" role = "button" class = "btn btn-secondary" aria-expanded = "false">
                     <i class = "fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
         </div>
     </div>
-    <!-- /.card-header -->
-    <!-- form start -->
     @if($errors->any())
-    <div class = "alert alert-danger mt-5">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class = "alert alert-danger mt-5">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
-    <form role="form" method = "post" action = "{{ route('update') }}">
+    <form role="form" method = "post" action = "{{ route('update.user') }}">
       <div class="card-body">
         @csrf
         <div class="form-group">

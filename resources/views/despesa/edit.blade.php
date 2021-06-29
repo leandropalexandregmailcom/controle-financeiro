@@ -29,32 +29,28 @@
       <div class="card-body">
         @csrf
         <div class="form-group">
-            <label for="name">Categoria</label>
-            <select name = "categoria" class="form-control">
-                @foreach($categorias as $categoria)
-                    <option @if($categoria->id_categoria == $despesa->id_categoria) selected @endif value = "{{ $categoria->id_categoria }}">
-                            {{ $categoria->nome }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control" value = "{{ $despesa->nome }}" id="name" name = "name" placeholder="Nome">
+            <input type="text" class="form-control" value = "{{ $despesa->nome }}" id="name" name = "nome" placeholder="Nome">
         </div>
         <div class="form-group">
             <label for="text">Descricão</label>
             <input type="text" class="form-control" value = "{{ $despesa->descricao }}" id="descricao" name = "descricao" placeholder="Descrição">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-3">
             <label for="email">Data</label>
-            <input class = "form-control" value="{{ $despesa->date->format('d/m/Y') }}"  type="date" data-date-format="DD MMMM YYYY"  name = "data" placeholder="Data">
+            <input class = "form-control" value="{{ \Carbon\Carbon::parse($despesa->date)->format('d/m/Y')}}"  type="text" data-date-format="DD MMMM YYYY"  name = "data" placeholder="Data">
         </div>
       </div>
+      <input type = "hidden" name = "id_despesa" value = "{{ $despesa->id_despesa }}">
       <!-- /.card-body -->
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Atualizar</button>
       </div>
     </form>
   </div>
+  <script>
+    $(document).ready(function(){
+      $('.date').mask('00/00/0000');
+      });
+</script>
 @endsection

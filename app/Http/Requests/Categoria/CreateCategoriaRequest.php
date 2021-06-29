@@ -13,18 +13,23 @@ class CreateCategoriaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'nome' 	    => 'required|unique:categoria,nome',
+            'descricao' => 'required|min:10|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required'      => 'O campo nome é obrigatório.',
+            'name.unique'        => 'Nome já existe.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
         ];
     }
 }

@@ -24,11 +24,14 @@ class UsuarioFactory implements UsuarioInterface
         $credentials['email'] = $usuario->getEmail();
         $credentials['password'] = $usuario->getPassword();
 
-
+        $route = 'home.user';
         if (Auth::attempt($credentials)) {
-            return redirect()->route('home.user');
+
+            return $route;
         }
-        return redirect()->route('show.user');
+
+        $route = 'login';
+        return $route;
     }
 
     public function logout()

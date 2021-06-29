@@ -49,7 +49,7 @@
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $tipo_financa->id_tipo_financa]) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit.tipo_financa', [$tipo_financa->id_tipo_financa]) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar

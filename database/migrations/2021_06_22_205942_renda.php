@@ -17,7 +17,7 @@ class Renda extends Migration
         Schema::create('renda', function(Blueprint $table)
         {
             $table->increments('id_renda');
-            $table->unsignedBigInteger('id_categoria')->references('id_categoria')->on('categoria');
+            //$table->unsignedBigInteger('id_categoria')->references('id_categoria')->on('categoria');
             $table->string('nome', 255);
             $table->text('descricao', 255);
             $table->integer('status')->default(1);

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use Carbon\Carbon;
 use App\Models\Despesa;
+use App\Models\Categoria;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Despesa\EditDespesaRequest;
 use App\Http\Requests\Despesa\CreateDespesaRequest;
 use App\Http\Requests\Despesa\UpdateDespesaRequest;
@@ -23,7 +28,7 @@ class DespesaController extends Controller
 
     public function show()
     {
-        return view('despesa/show');
+        return view('despesa/create')->with('categorias', Categoria::where(['id_user' => Auth::user()->id, 'status' => 1])->get());
     }
 
     public function create(CreateDespesaRequest $request)
@@ -32,23 +37,26 @@ class DespesaController extends Controller
 
         session()->flash('msg', 'O despesa foi cadastrado com sucesso!');
 
-        return redirect()->route('index');
+        return redirect()->route('index.despesa');
     }
 
     public function update(UpdateDespesaRequest $request)
     {
-        $this->model->update($request->except('_token'));
+        $this->model->where(['id_despesa' => $request->id_despesa])->update([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'data' => Carbon::createFromFormat('m/d/Y', $request->data)->format('Y-m-d')
+        ]);
 
         session()->flash('msg', 'O despesa foi atualizada com sucesso!');
 
-        return redirect()->route('index');
+        return redirect()->route('index.despesa');
     }
 
-    public function edit(EditDespesaRequest $request)
+    public function edit(Request $request)
     {
-        $this->model->findOrFail($request->id);
 
-        return view('despesa/edit')->with('despesa', $this->model->where(['status' => 1])->findOrFail($request->id));
+        return view('despesa/edit')->with('despesa', $this->model->where(['status' => 1, 'id_despesa' => $request->id])->first());
     }
 
     public function delete(EditDespesaRequest $request)

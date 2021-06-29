@@ -21,7 +21,8 @@ class Categoria extends Migration
             $table->text('descricao', 255);
             $table->integer('status')->default(1);
             $table->unsignedBigInteger('id_user')->references('id')->on('users');
-            $table->unsignedBigInteger('id_tipo_financa')->references('id_tipo_financa')->on('tipo_financa');
+            //$table->unsignedBigInteger('id_tipo_financa')->references('id_tipo_financa')->on('tipo_financa');
+            $table->string('nome_tipo_financa', 255);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
         });

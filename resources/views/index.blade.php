@@ -15,17 +15,18 @@
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script srt = "asset('js/jquery/dist/jquery.mask.min.js')"></script>
+  <script src = "{{ asset('js/jquery/dist/jquery.mask.min.js') }}"></script>
 
 </head>
 <body class="hold-transition sidebar-mini">
-
-<div class = "container">
- @yield('content')
-</div>
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('dist/js/demo.js') }}"></script>
-</body>
-</html>
+    <div class = "container">
+        <div class="card card-primary container">
+            @yield('content')
+        </div>
+    </div>
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('dist/js/demo.js') }}"></script>
+    </body>
+    </html>

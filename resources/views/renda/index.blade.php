@@ -43,7 +43,7 @@
                     <tr>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $renda->name }}
+                                {{ $renda->nome }}
                             </a>
                         </td>
                         <td style = "width: 10%;">
@@ -57,7 +57,7 @@
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $renda->id_renda]) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit.renda', [$renda->id_renda]) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar
@@ -109,7 +109,7 @@
                 $.ajax({
                     headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     type 	: 'post',
-                    url		: 'renda/delete',
+                    url		: 'delete',
                     data 	: { id : id}
                 }).done(function(response)
                 {

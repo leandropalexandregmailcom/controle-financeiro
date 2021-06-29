@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Cadastrar Categoria</h3>
+      <h3 class="card-title">Editar Categoria</h3>
     </div>
     <div class = "panel-heading">
         <div class = "row m-1">
@@ -25,23 +25,21 @@
         </ul>
     </div>
     @endif
-    <form role="form" method = "post" action = "{{ route('create.categoria') }}">
+    <form role="form" method = "post" action = "{{ route('update.categoria') }}">
       <div class="card-body">
         @csrf
         <div class="form-group">
             <label for="name">Tipo de finança</label>
-            <select name = "tipo_financa" class="form-control">
-                @foreach($tipo_financas as $tipo_financa)
-                    <option @if($tipo_financa->id_tipo_financa == $categoria->id_tipo_financa)
-                        selected
-                        @endif
-                        value = "{{ $tipo_financa->id_tipo_financa }}">
-                            {{ $tipo_financa->nome }}
-                    </option>
-                @endforeach
-            </select>
+            <select name = "nome_tipo_financa" class="form-control">
+                <option @if($categoria->nome_tipo_financa == "Renda") selected @endif value = "Renda">
+                        Renda
+                </option>
+                <option @if($categoria->nome_tipo_financa == "Despesa") selected @endif value = "Despesa">
+                    Despesa
+                </option>
+        </select>
         </div>
-
+        <input value = "{{ $categoria->id_categoria }}" name = "id" type = "hidden">
         <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" value = "{{ $categoria->nome }}" class="form-control" id="nome" name = "nome" placeholder="Nome">
@@ -51,9 +49,8 @@
             <input type="text" value = "{{ $categoria->descricao}}" class="form-control" id="descricao" name = "descricao" placeholder="Descrição">
         </div>
       </div>
-      <!-- /.card-body -->
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
       </div>
     </form>
   </div>

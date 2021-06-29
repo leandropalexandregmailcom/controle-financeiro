@@ -19,7 +19,7 @@ class CreateRendaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' 	    => 'required|unique:tipo_financa,nome',
+            'nome' 	    => 'required',
             'descricao' => 'required|min:10|max:255',
             'data'      => 'required|date'
         ];
@@ -31,7 +31,7 @@ class CreateRendaRequest extends FormRequest
             'name.required'      => 'O campo nome é obrigatório.',
             'name.min'           => 'Minímo de 10 caractéres.',
             'name.max'           => 'Máximo de 255 caractéres.',
-            'descrição.required' => 'O campo descrição é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
             'data.required'      => 'O campo data é obrigatório.',
             'data.date'          => 'O campo deve ser do tipo data.'
         ];

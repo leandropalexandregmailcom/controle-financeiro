@@ -19,7 +19,7 @@ class CreateDespesaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' 	    => 'required|unique:tipo_financa,nome',
+            'nome' 	    => 'required',
             'descricao' => 'required|min:10|max:255',
             'data'      => 'required|date'
         ];

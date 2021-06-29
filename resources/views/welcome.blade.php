@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Crud</title>
+  <title>Finanças pessoais</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,62 +16,94 @@
   <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script srt = "asset('js/jquery/dist/jquery.mask.min.js')"></script>
-
+  <script src="plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
 <div class="wrapper">
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <span class="brand-text font-weight-light">Crud</span>
-
-
-    <!-- Sidebar -->
     <div class="sidebar">
-
-
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Menu
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('home.user') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gerenciar</p>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="fas fa-piggy-bank"></i>
+                    <p>Finanças pessoais</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('show.user') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cadadastrar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
+            </li>
+            <li class="nav-item has-treeview">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a  class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <p>Usuário</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('edit.user') }}" class="nav-link">
+                                    <i class="fas fa-edit"></i>
+                                    <p>Atualizar Dados</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="logout nav-link">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <p>Logout</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('index.renda') }}" class="nav-link">
+                            <i class="fas fa-coins"></i>
+                            <p>Renda</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('index.despesa') }}" class="nav-link">
+                            <i class="fas fa-minus-square"></i>
+                            <p>Despesa</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
       </nav>
     </div>
   </aside>
 
 <div class="content-wrapper">
-    gsfdss
  @yield('content')
 </div>
 </div>
-<script src="plugins/jquery/jquery.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    $(".logout").click(function(e)
+    {
+        e.preventDefault()
+
+        $.ajax({
+            headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type 	: 'post',
+            url		: '/crud-laravel-main/public/user/logout',
+        }).done(function(response)
+        {
+            if(response)
+            {
+                window.location.reload()
+            }
+        }).fail(function(response)
+        {
+            console.log(response)
+        })
+    })
+});
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
 </body>
 </html>

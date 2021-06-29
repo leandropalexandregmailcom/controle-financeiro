@@ -21,6 +21,15 @@
         </div>
         </div>
         <div class="card-body p-0">
+            @if($errors->any())
+            <div class = "alert alert-danger mt-5">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <table class="table table-striped projects">
             <thead>
                 <tr>
@@ -57,7 +66,7 @@
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="edit?id={{ $user->id }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit.user', $user->id) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar
@@ -109,7 +118,7 @@
                 $.ajax({
                     headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     type 	: 'post',
-                    url		: 'delete',
+                    url		: 'user/delete',
                     data 	: { id : id}
                 }).done(function(response)
                 {

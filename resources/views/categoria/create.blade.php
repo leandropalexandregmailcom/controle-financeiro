@@ -30,12 +30,13 @@
         @csrf
         <div class="form-group">
             <label for="name">Tipo de finança</label>
-            <select name = "tipo_financa" class="form-control">
-                @foreach($tipo_financas as $tipo_financa)
-                    <option value = "{{ $tipo_financa->id_tipo_financa }}">
-                            {{ $tipo_financa->nome }}
+            <select name = "nome_tipo_financa" class="form-control">
+                    <option value = "Renda">
+                            Renda
                     </option>
-                @endforeach
+                    <option value = "Despesa">
+                        Despesa
+                    </option>
             </select>
         </div>
         <div class="form-group">

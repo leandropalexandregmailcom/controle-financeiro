@@ -43,7 +43,7 @@
                     <tr>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $categoria->name }}
+                                {{ $categoria->nome }}
                             </a>
                         </td>
                         <td style = "width: 10%;">
@@ -53,11 +53,11 @@
                         </td>
                         <td style = "width: 10%;">
                             <a>
-                                {{ $categoria->tipo_financa->nome }}
+                                {{ $categoria->nome_tipo_financa }}
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="{{ route('edit', [id = > $categoria->id_categoria]) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('edit.categoria', $categoria->id_categoria) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Editar
@@ -109,7 +109,7 @@
                 $.ajax({
                     headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     type 	: 'post',
-                    url		: 'categoria/delete',
+                    url		: 'delete',
                     data 	: { id : id}
                 }).done(function(response)
                 {
