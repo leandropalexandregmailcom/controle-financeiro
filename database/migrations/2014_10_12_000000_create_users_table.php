@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('date_of_birth')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->softDeletes();
         });
     }
 

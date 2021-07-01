@@ -21,7 +21,7 @@ class SocialiteController extends Controller
         return Socialite::driver($this->factory->createProvider($provider))->redirect();
     }
 
-    public function callback()
+    public function callbackFacebook()
     {
         $userProvider = Socialite::driver('facebook')->user();
 

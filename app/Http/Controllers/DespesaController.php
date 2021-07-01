@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Despesa;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Models\FormaPagamento;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Despesa\EditDespesaRequest;
 use App\Http\Requests\Despesa\CreateDespesaRequest;
@@ -23,12 +24,14 @@ class DespesaController extends Controller
 
     public function index()
     {
-        return view('despesa/index')->with('despesas',$this->model->where(['status' => 1])->paginate(10));
+        return view('despesa/index')->with('despesas',$this->model->paginate(10));
     }
 
     public function show()
     {
-        return view('despesa/create')->with('categorias', Categoria::where(['id_user' => Auth::user()->id, 'status' => 1])->get());
+        return view('despesa/create')
+        ->with('categorias', Categoria::where(['id_user' => Auth::user()->id])->get())
+        ->with('formas_pagamento', FormaPagamento::where(['id_user' => Auth::user()->id])->get());
     }
 
     public function create(CreateDespesaRequest $request)
@@ -56,11 +59,11 @@ class DespesaController extends Controller
     public function edit(Request $request)
     {
 
-        return view('despesa/edit')->with('despesa', $this->model->where(['status' => 1, 'id_despesa' => $request->id])->first());
+        return view('despesa/edit')->with('despesa', $this->model->where(['id_despesa' => $request->id])->first());
     }
 
     public function delete(EditDespesaRequest $request)
     {
-        $this->model->where(['id' => $request->id])->update(['status' => 0]);
+        $this->model->where(['id_despesa' => $request->id])->delete();
     }
 }

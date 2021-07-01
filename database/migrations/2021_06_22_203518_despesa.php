@@ -24,6 +24,7 @@ class Despesa extends Migration
             $table->timestamp('data')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->softDeletes();
         });
     }
 

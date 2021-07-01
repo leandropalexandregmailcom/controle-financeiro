@@ -25,6 +25,7 @@ class Categoria extends Migration
             $table->string('nome_tipo_financa', 255);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
+            $table->softDeletes();
         });
     }
 

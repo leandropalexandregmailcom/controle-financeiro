@@ -19,12 +19,12 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        return view('categoria/index')->with('categorias', $this->model->where(['status' => 1])->paginate(10));
+        return view('categoria/index')->with('categorias', $this->model->paginate(10));
     }
 
     public function show()
     {
-        return view('categoria/create')->with('tipo_financas', TipoFinanca::where(['status' => 1])->get());
+        return view('categoria/create')->with('tipo_financas', TipoFinanca::get());
     }
 
     public function create(CreateCategoriaRequest $request)
@@ -56,12 +56,12 @@ class CategoriaController extends Controller
 
     public function edit(Request $request)
     {
-        return view('categoria/edit')->with('categoria', $this->model->where(['status' => 1, 'id_categoria' => $request->id])->first());
+        return view('categoria/edit')->with('categoria', $this->model->where(['id_categoria' => $request->id])->first());
     }
 
     public function delete(EditCategoriaRequest $request)
     {
-        $this->model->where(['id_categoria' => $request->id])->update(['status' => 0]);
+        $this->model->where(['id_categoria' => $request->id])->delete();
 
         return true;
     }

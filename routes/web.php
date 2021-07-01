@@ -17,10 +17,12 @@ Route::post('logar', [LoginController::class, 'logar'])->name('logar');
 Route::get('show', [UserController::class, 'show'])->name('show.user');
 Route::post('create', [UserController::class, 'create'])->name('create.user');
 
+Route::get('callback', [SocialiteController::class, 'callbackFacebook'])->name('callback.facebook');
+Route::prefix('social/')->group(function() {
 
-Route::get('redirect/{provider}', [SocialiteController::class, 'redirect'])->name('redirect');
-Route::get('callback', [SocialiteController::class, 'callback'])->name('callback');
+    Route::get('redirect/{provider}', [SocialiteController::class, 'redirect'])->name('redirect');
 
+});
 Route::middleware('auth')->group(function() {
     Route::get('/', [UserController::class, 'index'])->name('home.user');
 });

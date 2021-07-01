@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Renda extends Model
+class FormaPagamento extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    public $table = "renda";
-    public $timestamp = false;
+    public $timestamps = false;
+    public $table = "forma_pagamento";
 
-    protected $fillable = ['id_renda', 'nome', 'descricao', 'id_categoria', 'data', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['nome', 'id_user', 'created_at', 'updated_at'];
 }

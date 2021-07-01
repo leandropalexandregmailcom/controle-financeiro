@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TipoFinanca extends Migration
+class FormaRecebimento extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,11 @@ class TipoFinanca extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_financa', function(Blueprint $table)
+        Schema::create('forma_recebimento', function(Blueprint $table)
         {
-            $table->increments('id_tipo_financa');
+            $table->increments('id_forma_recebimento');
             $table->unsignedBigInteger('id_user')->references('id')->on('users');
-            $table->string('nome', 255)->unique();
-            $table->text('descricao', 255);
-            $table->integer('status')->default(1);
+            $table->string('nome', 255);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('NULL ON UPDATE CURRENT_TIMESTAMP'))->nullable();
             $table->softDeletes();
@@ -34,6 +32,6 @@ class TipoFinanca extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_financa');
+        Schema::dropIfExists('forma_recebimento');
     }
 }
