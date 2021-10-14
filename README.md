@@ -1,3 +1,9 @@
+Para fazer a instalação do projeto é necessário que se tenha o composer e o php superior a versão 8 instalado no computador e o banco de dados mysql.
+Também é necessário fazer a configuração do arquivo .env passando como paramêtro as do banco de dados.
+Além disso é necessário criar um banco de dados com o mesmo nome indicado no arquivo .env e digitar no terminal de comandos: php artisan key: generate,
+php artisan migrate e php artisan serve para subir o servidor. Após digitar esses comandos, o projeto deverá subir na porta 8000 ou 8080 da sua máquina.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
